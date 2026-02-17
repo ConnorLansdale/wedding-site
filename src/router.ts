@@ -34,6 +34,10 @@ const routes: Route[] = [
   {
     path: 'registry',
     template: 'registry'
+  },
+  {
+    path: 'admin',
+    template: 'admin'
   }
 ];
 
