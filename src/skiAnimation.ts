@@ -13,7 +13,7 @@
  */
 
 const DURATION_MS = 6000
-const TRAIL_FADE_MS = 2500  // How long a trail segment takes to fully fade
+const TRAIL_FADE_MS = 800   // How long a trail segment takes to fully fade
 const SKIER_EMOJI = '⛷️'
 
 interface TrailPoint {
@@ -73,7 +73,7 @@ export function runSkierAnimation(): void {
   const minSpeed = (maxDist / (DURATION_MS / 1000)) * 1.1  // 10% extra to overshoot slightly
 
   // Spawn 1–4 skiers, spread roughly evenly around 360°
-  const count = Math.floor(Math.random() * 4) + 1
+  const count = Math.floor(Math.random() * 3) + 2  // 2–4 skiers
   const skiers: Skier[] = Array.from({ length: count }, (_, i) => {
     // Spread evenly with a small random jitter so they don't bunch up
     const baseAngle = (i / count) * Math.PI * 2
