@@ -2,6 +2,7 @@ import './style.css';
 import { initRouter } from './router';
 import { isAuthenticated, showPasswordGate } from './auth';
 import { initRsvpForm } from './rsvp';
+import { initAdminPage } from './admin';
 
 /**
  * Wedding Date Configuration
@@ -97,6 +98,9 @@ async function init(): Promise<void> {
 
   // Initialize RSVP form
   initRsvpForm();
+
+  // Initialize admin page
+  initAdminPage();
 
   // Add scroll animations
   addScrollAnimation();
