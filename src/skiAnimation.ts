@@ -83,7 +83,7 @@ export function runSkierAnimation(): void {
       angle: baseAngle + jitter,
       speed: minSpeed + Math.random() * 40,  // guaranteed to reach edge + a bit more
       amplitude: 80 + Math.random() * 80,    // 80–160 px sway - wide, graceful curves
-      frequency: 0.07 + Math.random() * 0.06, // 0.07–0.13 cycles/sec - slow sweeping S-turns
+      frequency: 0.10 + Math.random() * 0.03, // 0.10–0.13 cycles/sec - slow sweeping S-turns
       phase: Math.random() * Math.PI * 2,
       trail: [],
     }
