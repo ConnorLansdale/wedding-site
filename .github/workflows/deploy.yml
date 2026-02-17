@@ -25,6 +25,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check secrets are set
+        run: |
+          echo "SUPABASE_URL is set: ${{ secrets.VITE_SUPABASE_URL != '' }}"
+          echo "SUPABASE_KEY is set: ${{ secrets.VITE_SUPABASE_ANON_KEY != '' }}"
+          echo "SITE_PASSWORD is set: ${{ secrets.VITE_SITE_PASSWORD != '' }}"
+
       - name: Build
         run: npm run build
         env:
