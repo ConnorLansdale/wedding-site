@@ -67,6 +67,11 @@ export function runSkierAnimation(): void {
 
   const ctx = canvas.getContext('2d')!
 
+  // Compute the minimum speed needed to guarantee reaching the screen edge
+  // Max distance from center to a corner = half the diagonal
+  const maxDist = Math.sqrt((w / 2) ** 2 + (h / 2) ** 2)
+  const minSpeed = (maxDist / (DURATION_MS / 1000)) * 1.1  // 10% extra to overshoot slightly
+
   // Spawn 1–8 skiers, spread roughly evenly around 360°
   const count = Math.floor(Math.random() * 8) + 1
   const skiers: Skier[] = Array.from({ length: count }, (_, i) => {
@@ -76,9 +81,9 @@ export function runSkierAnimation(): void {
 
     return {
       angle: baseAngle + jitter,
-      speed: 90 + Math.random() * 70,      // 90–160 px/sec
-      amplitude: 35 + Math.random() * 55,  // 35–90 px sway
-      frequency: 0.6 + Math.random() * 0.8, // 0.6–1.4 cycles/sec
+      speed: minSpeed + Math.random() * 40,  // guaranteed to reach edge + a bit more
+      amplitude: 40 + Math.random() * 60,    // 40–100 px sway
+      frequency: 0.18 + Math.random() * 0.14, // 0.18–0.32 cycles/sec (long, lazy S-turns)
       phase: Math.random() * Math.PI * 2,
       trail: [],
     }
