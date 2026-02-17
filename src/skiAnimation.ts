@@ -12,7 +12,7 @@
  * - Everything fades out in the final second
  */
 
-const DURATION_MS = 6000
+const DURATION_MS = 4000
 const TRAIL_FADE_MS = 800   // How long a trail segment takes to fully fade
 const SKIER_EMOJI = '⛷️'
 
