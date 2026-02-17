@@ -1,3 +1,5 @@
+import { runSkierAnimation } from './skiAnimation'
+
 /**
  * Site-wide password gate
  *
@@ -108,7 +110,8 @@ export function showPasswordGate(): Promise<void> {
       const password = input.value.trim()
 
       if (attemptLogin(password)) {
-        // Correct - animate out and resolve
+        // Correct - launch skiers then animate gate out
+        runSkierAnimation()
         overlay.classList.add('gate-exit')
         overlay.addEventListener('animationend', () => {
           overlay.remove()
