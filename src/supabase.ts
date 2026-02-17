@@ -22,8 +22,6 @@ export interface Rsvp {
   id?: string
   created_at?: string
   guest_name: string
-  email: string
-  phone?: string
   attending: boolean
   number_of_guests: number
   dietary_restrictions?: string

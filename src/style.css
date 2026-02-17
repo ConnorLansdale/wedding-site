@@ -623,6 +623,12 @@ body {
   border: 2px solid #9ae6b4;
 }
 
+.rsvp-message--warning {
+  background: #fffbeb;
+  color: #92400e;
+  border: 2px solid #fcd34d;
+}
+
 .rsvp-message--error {
   background: #fff5f5;
   color: #c53030;
