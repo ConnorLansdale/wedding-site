@@ -77,7 +77,6 @@ function renderTable(rsvps: Rsvp[]): string {
   const rows = rsvps.map(r => `
     <tr class="${r.attending ? 'row--yes' : 'row--no'}">
       <td>${r.guest_name}</td>
-      <td>${r.email}</td>
       <td>${r.attending ? 'Yes' : 'No'}</td>
       <td>${r.attending ? (r.number_of_guests ?? 1) : '—'}</td>
       <td>${r.dietary_restrictions || '—'}</td>
@@ -92,7 +91,6 @@ function renderTable(rsvps: Rsvp[]): string {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Email</th>
             <th>Attending</th>
             <th>Guests</th>
             <th>Dietary</th>

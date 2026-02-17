@@ -9,13 +9,13 @@ import { supabase, type Rsvp } from './supabase'
  */
 
 /**
- * Check if an email has already RSVP'd
+ * Check if a name has already RSVP'd
  */
-async function checkDuplicate(email: string): Promise<boolean> {
+async function checkDuplicate(name: string): Promise<boolean> {
   const { data, error } = await supabase
     .from('rsvps')
     .select('id')
-    .eq('email', email)
+    .ilike('guest_name', name)
     .limit(1)
 
   if (error) throw new Error(error.message)
@@ -36,7 +36,7 @@ async function submitRsvp(rsvp: Rsvp): Promise<void> {
 /**
  * Show a success or error message in the form
  */
-function showFormMessage(type: 'success' | 'error', message: string): void {
+function showFormMessage(type: 'success' | 'warning' | 'error', message: string): void {
   const el = document.getElementById('rsvp-message')
   if (!el) return
   el.textContent = message
@@ -76,31 +76,27 @@ export function initRsvpForm(): void {
     // Read form values
     const attending = (form.querySelector<HTMLInputElement>('input[name="attending"]:checked'))?.value === 'true'
     const guestName = (form.querySelector<HTMLInputElement>('#guest-name'))?.value.trim() ?? ''
-    const email = (form.querySelector<HTMLInputElement>('#guest-email'))?.value.trim() ?? ''
-    const phone = (form.querySelector<HTMLInputElement>('#guest-phone'))?.value.trim() ?? ''
     const numberOfGuests = parseInt((form.querySelector<HTMLInputElement>('#number-of-guests'))?.value ?? '1')
     const dietaryRestrictions = (form.querySelector<HTMLInputElement>('#dietary-restrictions'))?.value.trim() ?? ''
     const message = (form.querySelector<HTMLTextAreaElement>('#rsvp-message-input'))?.value.trim() ?? ''
 
     // Basic validation
-    if (!guestName || !email) {
-      showFormMessage('error', 'Please fill in your name and email.')
+    if (!guestName) {
+      showFormMessage('error', 'Please fill in your name.')
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send RSVP' }
       return
     }
 
     try {
-      const isDuplicate = await checkDuplicate(email)
+      const isDuplicate = await checkDuplicate(guestName)
       if (isDuplicate) {
-        showFormMessage('success', `You're already on the list, ${guestName}! If you need to make changes, reach out to us directly.`)
+        showFormMessage('warning', `Looks like you're already on the list, ${guestName}! If you need to make changes, reach out to us directly.`)
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send RSVP' }
         return
       }
 
       await submitRsvp({
         guest_name: guestName,
-        email,
-        phone: phone || undefined,
         attending,
         number_of_guests: attending ? numberOfGuests : 0,
         dietary_restrictions: dietaryRestrictions || undefined,
