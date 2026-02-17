@@ -55,8 +55,7 @@ function updateCountdown(): void {
 }
 
 /**
- * Add confetti animation on scroll
- * (Optional fun feature - can be removed if too much)
+ * Add scroll animation observers
  */
 function addScrollAnimation(): void {
   const observer = new IntersectionObserver(
