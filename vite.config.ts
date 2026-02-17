@@ -3,8 +3,8 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   // Base path for GitHub Pages deployment
-  // Change this if using custom domain (set to '/')
-  base: '/wedding-site/',
+  // For repo: https://username.github.io/wedding-site/
+  base: process.env.NODE_ENV === 'production' ? '/wedding-site/' : '/',
 
   build: {
     // Output directory
