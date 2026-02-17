@@ -53,7 +53,7 @@ export function showPasswordGate(): Promise<void> {
     overlay.id = 'password-gate'
     overlay.innerHTML = `
       <div class="gate-card">
-        <h1 class="gate-title">Connor <span class="gate-ampersand">&</span> Kippy</h1>
+        <h1 class="gate-title">Kippy <span class="gate-ampersand">&</span> Connor</h1>
         <p class="gate-subtitle">Please enter the password to continue</p>
         <form id="gate-form" class="gate-form">
           <div class="gate-input-wrapper">
