@@ -19,6 +19,9 @@
             <a href="#/details" class="nav-link">Details</a>
           </li>
           <li class="nav-item">
+            <a href="#/rsvp" class="nav-link">RSVP</a>
+          </li>
+          <li class="nav-item">
             <a href="#/registry" class="nav-link">Registry</a>
           </li>
         </ul>
@@ -179,6 +182,78 @@
         </section>
 
         <!-- Footer -->
+        <footer class="footer">
+          <p>Can't wait to celebrate with you!</p>
+          <p class="footer-small">Questions? Contact us at hello@connorandkippy.com</p>
+        </footer>
+      </div>
+
+      <!-- RSVP PAGE -->
+      <div id="page-rsvp" class="page-content" style="display: none;">
+        <header class="page-header">
+          <div class="container">
+            <h1 class="page-title">RSVP</h1>
+            <p class="page-subtitle">Please respond by May 1, 2026</p>
+          </div>
+        </header>
+
+        <section class="rsvp-section">
+          <div class="container">
+            <form id="rsvp-form" class="rsvp-form">
+
+              <div class="form-group">
+                <label for="guest-name" class="form-label">Full Name *</label>
+                <input type="text" id="guest-name" class="form-input" placeholder="Your name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="guest-email" class="form-label">Email *</label>
+                <input type="email" id="guest-email" class="form-input" placeholder="your@email.com" required />
+              </div>
+
+              <div class="form-group">
+                <label for="guest-phone" class="form-label">Phone (optional)</label>
+                <input type="tel" id="guest-phone" class="form-input" placeholder="(555) 555-5555" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Will you be attending? *</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="attending" value="true" required />
+                    <span class="radio-custom"></span>
+                    Joyfully accepts 🎉
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="attending" value="false" required />
+                    <span class="radio-custom"></span>
+                    Regretfully declines
+                  </label>
+                </div>
+              </div>
+
+              <div id="guest-count-section" class="form-group" style="display: none;">
+                <label for="number-of-guests" class="form-label">Number of guests (including yourself)</label>
+                <input type="number" id="number-of-guests" class="form-input" min="1" max="10" value="1" />
+              </div>
+
+              <div class="form-group">
+                <label for="dietary-restrictions" class="form-label">Dietary restrictions (optional)</label>
+                <input type="text" id="dietary-restrictions" class="form-input" placeholder="Vegetarian, vegan, gluten-free, allergies..." />
+              </div>
+
+              <div class="form-group">
+                <label for="rsvp-message-input" class="form-label">Note for Connor & Kippy (optional)</label>
+                <textarea id="rsvp-message-input" class="form-input form-textarea" placeholder="Leave a message..." rows="3"></textarea>
+              </div>
+
+              <p id="rsvp-message" class="rsvp-message"></p>
+
+              <button type="submit" class="rsvp-submit">Send RSVP</button>
+            </form>
+          </div>
+        </section>
+
         <footer class="footer">
           <p>Can't wait to celebrate with you!</p>
           <p class="footer-small">Questions? Contact us at hello@connorandkippy.com</p>

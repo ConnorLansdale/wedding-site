@@ -28,6 +28,10 @@ const routes: Route[] = [
     template: 'details'
   },
   {
+    path: 'rsvp',
+    template: 'rsvp'
+  },
+  {
     path: 'registry',
     template: 'registry'
   }

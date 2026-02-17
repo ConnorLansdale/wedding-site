@@ -1,5 +1,7 @@
 import './style.css';
 import { initRouter } from './router';
+import { isAuthenticated, showPasswordGate } from './auth';
+import { initRsvpForm } from './rsvp';
 
 /**
  * Wedding Date Configuration
@@ -78,7 +80,12 @@ function addScrollAnimation(): void {
 /**
  * Initialize the application
  */
-function init(): void {
+async function init(): Promise<void> {
+  // Show password gate if not authenticated
+  if (!isAuthenticated()) {
+    await showPasswordGate();
+  }
+
   // Initialize the router (SPA navigation)
   initRouter();
 
@@ -87,6 +94,9 @@ function init(): void {
 
   // Update countdown every second
   setInterval(updateCountdown, 1000);
+
+  // Initialize RSVP form
+  initRsvpForm();
 
   // Add scroll animations
   addScrollAnimation();
