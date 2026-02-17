@@ -1,4 +1,4 @@
-import { supabase, type Rsvp } from './supabase'
+import { supabase, type Rsvp, type Invitee } from './supabase'
 
 /**
  * RSVP Form Handler
@@ -50,18 +50,29 @@ export function initRsvpForm(): void {
   const form = document.getElementById('rsvp-form') as HTMLFormElement | null
   if (!form) return
 
-  // Toggle guest count field based on attending selection
-  const attendingInputs = form.querySelectorAll<HTMLInputElement>('input[name="attending"]')
-  const guestCountSection = document.getElementById('guest-count-section')
+  const plusOneSection = document.getElementById('plus-one-section') as HTMLElement | null
+  const plusOneNameSpan = document.getElementById('plus-one-name') as HTMLElement | null
 
-  attendingInputs.forEach(input => {
-    input.addEventListener('change', () => {
-      const attending = (form.querySelector<HTMLInputElement>('input[name="attending"]:checked'))?.value === 'true'
-      if (guestCountSection) {
-        guestCountSection.style.display = attending ? 'block' : 'none'
-      }
-    })
-  })
+  // Read the last name stored at login
+  const authLastName = sessionStorage.getItem('wedding_auth_last_name')
+
+  // Look up invitee to determine plus-one eligibility
+  if (authLastName) {
+    supabase
+      .from('invitees')
+      .select('has_plus_one, plus_one_name')
+      .ilike('last_name', authLastName)
+      .limit(1)
+      .then(({ data }) => {
+        const invitee = data?.[0] as Pick<Invitee, 'has_plus_one' | 'plus_one_name'> | undefined
+        if (invitee?.has_plus_one && plusOneSection) {
+          if (plusOneNameSpan) {
+            plusOneNameSpan.textContent = invitee.plus_one_name || 'Plus One'
+          }
+          plusOneSection.style.display = 'block'
+        }
+      })
+  }
 
   // Handle form submission
   form.addEventListener('submit', async (e) => {
@@ -76,9 +87,10 @@ export function initRsvpForm(): void {
     // Read form values
     const attending = (form.querySelector<HTMLInputElement>('input[name="attending"]:checked'))?.value === 'true'
     const guestName = (form.querySelector<HTMLInputElement>('#guest-name'))?.value.trim() ?? ''
-    const numberOfGuests = parseInt((form.querySelector<HTMLInputElement>('#number-of-guests'))?.value ?? '1')
     const dietaryRestrictions = (form.querySelector<HTMLInputElement>('#dietary-restrictions'))?.value.trim() ?? ''
     const message = (form.querySelector<HTMLTextAreaElement>('#rsvp-message-input'))?.value.trim() ?? ''
+    const plusOneVal = (form.querySelector<HTMLInputElement>('input[name="plus-one-attending"]:checked'))?.value
+    const plusOneAttending = plusOneVal === 'true' ? true : plusOneVal === 'false' ? false : undefined
 
     // Basic validation
     if (!guestName) {
@@ -98,16 +110,17 @@ export function initRsvpForm(): void {
       await submitRsvp({
         guest_name: guestName,
         attending,
-        number_of_guests: attending ? numberOfGuests : 0,
+        last_name: authLastName ?? '',
+        plus_one_attending: plusOneAttending,
         dietary_restrictions: dietaryRestrictions || undefined,
         message: message || undefined,
       })
 
       // Success!
       form.reset()
-      if (guestCountSection) guestCountSection.style.display = 'none'
+      if (plusOneSection) plusOneSection.style.display = 'none'
       showFormMessage('success', attending
-        ? `🎉 You're on the list, ${guestName}! Can't wait to see you!`
+        ? `You're on the list, ${guestName}! Can't wait to see you!`
         : `We'll miss you, ${guestName}. Thank you for letting us know.`
       )
     } catch (err) {

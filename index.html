@@ -219,9 +219,20 @@
                 </div>
               </div>
 
-              <div id="guest-count-section" class="form-group" style="display: none;">
-                <label for="number-of-guests" class="form-label">Number of guests (including yourself)</label>
-                <input type="number" id="number-of-guests" class="form-input" min="1" max="10" value="1" />
+              <div id="plus-one-section" class="form-group" style="display: none;">
+                <label class="form-label">Will <span id="plus-one-name"></span> be attending?</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="plus-one-attending" value="true" />
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="plus-one-attending" value="false" />
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                </div>
               </div>
 
               <div class="form-group">
