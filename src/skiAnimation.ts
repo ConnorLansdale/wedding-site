@@ -72,8 +72,8 @@ export function runSkierAnimation(): void {
   const maxDist = Math.sqrt((w / 2) ** 2 + (h / 2) ** 2)
   const minSpeed = (maxDist / (DURATION_MS / 1000)) * 1.1  // 10% extra to overshoot slightly
 
-  // Spawn 1–8 skiers, spread roughly evenly around 360°
-  const count = Math.floor(Math.random() * 8) + 1
+  // Spawn 1–4 skiers, spread roughly evenly around 360°
+  const count = Math.floor(Math.random() * 4) + 1
   const skiers: Skier[] = Array.from({ length: count }, (_, i) => {
     // Spread evenly with a small random jitter so they don't bunch up
     const baseAngle = (i / count) * Math.PI * 2
@@ -82,8 +82,8 @@ export function runSkierAnimation(): void {
     return {
       angle: baseAngle + jitter,
       speed: minSpeed + Math.random() * 40,  // guaranteed to reach edge + a bit more
-      amplitude: 40 + Math.random() * 60,    // 40–100 px sway
-      frequency: 0.18 + Math.random() * 0.14, // 0.18–0.32 cycles/sec (long, lazy S-turns)
+      amplitude: 80 + Math.random() * 80,    // 80–160 px sway - wide, graceful curves
+      frequency: 0.07 + Math.random() * 0.06, // 0.07–0.13 cycles/sec - slow sweeping S-turns
       phase: Math.random() * Math.PI * 2,
       trail: [],
     }
