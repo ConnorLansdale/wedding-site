@@ -9,6 +9,20 @@ import { supabase, type Rsvp } from './supabase'
  */
 
 /**
+ * Check if an email has already RSVP'd
+ */
+async function checkDuplicate(email: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from('rsvps')
+    .select('id')
+    .eq('email', email)
+    .limit(1)
+
+  if (error) throw new Error(error.message)
+  return (data?.length ?? 0) > 0
+}
+
+/**
  * Submit an RSVP to the database
  */
 async function submitRsvp(rsvp: Rsvp): Promise<void> {
@@ -76,6 +90,13 @@ export function initRsvpForm(): void {
     }
 
     try {
+      const isDuplicate = await checkDuplicate(email)
+      if (isDuplicate) {
+        showFormMessage('success', `You're already on the list, ${guestName}! If you need to make changes, reach out to us directly.`)
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send RSVP' }
+        return
+      }
+
       await submitRsvp({
         guest_name: guestName,
         email,
