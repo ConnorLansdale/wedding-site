@@ -1,4 +1,5 @@
 import './style.css';
+import { initRouter } from './router';
 
 /**
  * Wedding Date Configuration
@@ -78,6 +79,9 @@ function addScrollAnimation(): void {
  * Initialize the application
  */
 function init(): void {
+  // Initialize the router (SPA navigation)
+  initRouter();
+
   // Update countdown immediately
   updateCountdown();
 

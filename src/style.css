@@ -480,6 +480,32 @@ body {
   color: var(--color-dark);
 }
 
+.coming-soon {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.coming-soon-icon {
+  font-size: 6rem;
+  margin-bottom: var(--spacing-md);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.coming-soon h2 {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.coming-soon p {
+  font-size: 1.2rem;
+  color: var(--color-dark);
+  opacity: 0.8;
+}
+
 /* Details Section */
 .details {
   padding: var(--spacing-xl) 0;
