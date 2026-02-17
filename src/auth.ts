@@ -56,14 +56,27 @@ export function showPasswordGate(): Promise<void> {
         <h1 class="gate-title">Connor <span class="gate-ampersand">&</span> Kippy</h1>
         <p class="gate-subtitle">Please enter the password to continue</p>
         <form id="gate-form" class="gate-form">
-          <input
-            type="password"
-            id="gate-input"
-            class="gate-input"
-            placeholder="Enter password"
-            autocomplete="current-password"
-            autofocus
-          />
+          <div class="gate-input-wrapper">
+            <input
+              type="password"
+              id="gate-input"
+              class="gate-input"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              autofocus
+            />
+            <button type="button" id="gate-toggle" class="gate-toggle" aria-label="Show password">
+              <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
           <p id="gate-error" class="gate-error"></p>
           <button type="submit" class="gate-button">Enter</button>
         </form>
@@ -75,6 +88,19 @@ export function showPasswordGate(): Promise<void> {
     const input = document.getElementById('gate-input') as HTMLInputElement
     const error = document.getElementById('gate-error') as HTMLElement
     const form = document.getElementById('gate-form') as HTMLFormElement
+    const toggle = document.getElementById('gate-toggle') as HTMLButtonElement
+    const eyeIcon = document.getElementById('eye-icon') as HTMLElement
+    const eyeOffIcon = document.getElementById('eye-off-icon') as HTMLElement
+
+    // Toggle password visibility
+    toggle.addEventListener('click', () => {
+      const isPassword = input.type === 'password'
+      input.type = isPassword ? 'text' : 'password'
+      eyeIcon.style.display = isPassword ? 'none' : 'block'
+      eyeOffIcon.style.display = isPassword ? 'block' : 'none'
+      toggle.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password')
+      input.focus()
+    })
 
     // Handle form submission
     form.addEventListener('submit', (e) => {
