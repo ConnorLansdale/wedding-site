@@ -202,15 +202,6 @@
                 <input type="text" id="guest-name" class="form-input" placeholder="Your name" required />
               </div>
 
-              <div class="form-group">
-                <label for="guest-email" class="form-label">Email *</label>
-                <input type="email" id="guest-email" class="form-input" placeholder="your@email.com" required />
-              </div>
-
-              <div class="form-group">
-                <label for="guest-phone" class="form-label">Phone (optional)</label>
-                <input type="tel" id="guest-phone" class="form-input" placeholder="(555) 555-5555" />
-              </div>
 
               <div class="form-group">
                 <label class="form-label">Will you be attending? *</label>
@@ -228,9 +219,20 @@
                 </div>
               </div>
 
-              <div id="guest-count-section" class="form-group" style="display: none;">
-                <label for="number-of-guests" class="form-label">Number of guests (including yourself)</label>
-                <input type="number" id="number-of-guests" class="form-input" min="1" max="10" value="1" />
+              <div id="plus-one-section" class="form-group" style="display: none;">
+                <label class="form-label">Will <span id="plus-one-name"></span> be attending?</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="plus-one-attending" value="true" />
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="plus-one-attending" value="false" />
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                </div>
               </div>
 
               <div class="form-group">
@@ -291,10 +293,72 @@
         <!-- Registry Links -->
         <section class="registry-section">
           <div class="container">
-            <div class="coming-soon">
-              <div class="coming-soon-icon">🎁</div>
-              <h2>Coming Soon!</h2>
-              <p>We're still working on our registry. Check back soon for details.</p>
+            <p class="registry-intro">
+              We're so grateful for your love and support. If you'd like to give a gift,
+              we've registered at a few of our favorite places.
+            </p>
+
+            <div class="registry-grid">
+              <!-- Upscale Home Stores -->
+              <a href="https://www.williams-sonoma.com/registry/your-registry-id" class="registry-card" target="_blank" rel="noopener">
+                <div class="registry-icon">🍳</div>
+                <h3>Williams Sonoma</h3>
+                <p>Kitchen essentials & cookware</p>
+                <span class="registry-btn">View Registry →</span>
+              </a>
+
+              <a href="https://www.crateandbarrel.com/gift-registry/your-registry-id" class="registry-card" target="_blank" rel="noopener">
+                <div class="registry-icon">🏠</div>
+                <h3>Crate & Barrel</h3>
+                <p>Home goods & entertaining</p>
+                <span class="registry-btn">View Registry →</span>
+              </a>
+
+              <a href="https://www.potterybarn.com/registry/your-registry-id" class="registry-card" target="_blank" rel="noopener">
+                <div class="registry-icon">🛋️</div>
+                <h3>Pottery Barn</h3>
+                <p>Furniture & decor</p>
+                <span class="registry-btn">View Registry →</span>
+              </a>
+
+              <a href="https://www.westelm.com/registry/your-registry-id" class="registry-card" target="_blank" rel="noopener">
+                <div class="registry-icon">✨</div>
+                <h3>West Elm</h3>
+                <p>Modern home furnishings</p>
+                <span class="registry-btn">View Registry →</span>
+              </a>
+
+              <!-- Practical Options -->
+              <a href="https://www.amazon.com/wedding/your-registry-id" class="registry-card" target="_blank" rel="noopener">
+                <div class="registry-icon">📦</div>
+                <h3>Amazon</h3>
+                <p>Everyday essentials</p>
+                <span class="registry-btn">View Registry →</span>
+              </a>
+
+              <a href="https://www.target.com/gift-registry/your-registry-id" class="registry-card" target="_blank" rel="noopener">
+                <div class="registry-icon">🎯</div>
+                <h3>Target</h3>
+                <p>Home basics & more</p>
+                <span class="registry-btn">View Registry →</span>
+              </a>
+            </div>
+
+            <!-- Cash Fund Section -->
+            <div class="cash-fund-section">
+              <h2>Honeymoon Fund</h2>
+              <p class="cash-fund-intro">
+                Your presence at our wedding is the greatest gift of all. If you'd like to
+                contribute to our honeymoon, we'd be incredibly grateful.
+              </p>
+              <div class="cash-fund-options">
+                <div class="cash-fund-card">
+                  <div class="cash-fund-icon">💚</div>
+                  <h3>Venmo</h3>
+                  <p class="cash-fund-handle">@YourVenmoHandle</p>
+                  <p class="cash-fund-note">Tap to open Venmo</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

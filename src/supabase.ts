@@ -16,16 +16,26 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 /**
+ * TypeScript type for an invitee row in the database
+ */
+export interface Invitee {
+  id?: string
+  created_at?: string
+  last_name: string
+  has_plus_one: boolean
+  plus_one_name?: string
+}
+
+/**
  * TypeScript type for an RSVP row in the database
  */
 export interface Rsvp {
   id?: string
   created_at?: string
   guest_name: string
-  email: string
-  phone?: string
   attending: boolean
-  number_of_guests: number
+  last_name: string
+  plus_one_attending?: boolean
   dietary_restrictions?: string
   message?: string
 }

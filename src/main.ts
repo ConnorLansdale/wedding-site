@@ -82,8 +82,9 @@ function addScrollAnimation(): void {
  * Initialize the application
  */
 async function init(): Promise<void> {
-  // Show password gate if not authenticated
-  if (!isAuthenticated()) {
+  // Show password gate if not authenticated (skip for admin route — it has its own gate)
+  const currentPath = window.location.hash.slice(1).replace(/^\//, '')
+  if (currentPath !== 'admin' && !isAuthenticated()) {
     await showPasswordGate();
   }
 
